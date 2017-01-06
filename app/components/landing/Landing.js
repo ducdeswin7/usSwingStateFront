@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-require('../_reset.scss');
 require('./landing.scss');
 
 let imgUrl = './public/images/landing-bg.jpg';

@@ -1,19 +1,46 @@
 import React from 'react';
+import { connect } from 'react-redux'
+
+require('./home.scss');
+
+import DataMap from '../dataMaps/DataMap';
+
+import ProgressBar from '../progressBar/ProgressBar';
+import Candidats from '../candidats/Candidats';
 
 class Home extends React.Component {
+    constructor(props){
+        super(props);
+    }
     render() {
+
         return (
             <div className="home">
-                <div className="home_bar">
-                    <div className="home_bar_progress"></div>
-                    <div className="home_bar_percent">
-                        <h2>57%</h2>
-                        <h2>43%</h2>
-                    </div>
+                <div className="home_header">
+                    <h1 className="home_header_title">Grands electeurs</h1>
+                    <ProgressBar />
+                </div>
+
+                <DataMap regionData={this.props.regionData} />
+
+                <div className="home_candidats">
+                    <div className="home_candidats_title">Biographies</div>
+                    <Candidats />
                 </div>
             </div>
         )
     }
 }
 
-export default Home;
+
+Home.propTypes = {
+    regionData: React.PropTypes.array.isRequired,
+};
+
+function mapStateToProps(state) {
+    return {
+        regionData: state.regionData,
+    }
+}
+
+export default connect(mapStateToProps)(Home);
