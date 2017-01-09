@@ -1,4 +1,4 @@
-const defaultFill = '#f2f2f2';
+const defaultFill = 'red';
 
 const statesDefaults = {
     'AL': { fillColor: defaultFill, value: '' },

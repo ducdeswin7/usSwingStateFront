@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
+import SkyLight from 'react-skylight';
+
 require('./home.scss');
 
 import DataMap from '../dataMaps/DataMap';
@@ -13,7 +15,7 @@ class Home extends React.Component {
         super(props);
     }
     render() {
-
+console.log(this.props)
         return (
             <div className="home">
                 <div className="home_header">
@@ -22,7 +24,6 @@ class Home extends React.Component {
                 </div>
 
                 <DataMap regionData={this.props.regionData} />
-
                 <div className="home_candidats">
                     <div className="home_candidats_title">Biographies</div>
                     <Candidats />
