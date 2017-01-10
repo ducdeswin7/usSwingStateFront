@@ -13,16 +13,28 @@ class Candidat extends React.Component {
     }
 
     render() {
-        let styleInline = {
+
+        let hexagonStyle = {
+            borderLeft: 'solid 2px #ff0000',
+            borderRight: 'solid 2px #ff0000',
             backgroundImage: 'url('+ this.state.candidat.img +')'
         };
 
+
+        let hexTopStyle = {
+            top: '-31.8198px',
+            borderTop: 'solid 4.8284px #ff0000',
+            borderRight: 'solid 4.8284px #ff0000'
+        };
+        let hexBottomStyle = {
+            borderBottom: 'solid 4.8284px #ff0000',
+            borderLeft: 'solid 4.8284px #ff0000'
+        };
+
         return(
-            <div className="hexagon hexagon2">
-                <div className="hexagon-in1">
-                    <div className="hexagon-in2" style={styleInline}>
-                    </div>
-                </div>
+            <div className="hexagon" style={hexagonStyle}>
+                <div className="hexTop" style={hexTopStyle}></div>
+                <div className="hexBottom" style={hexBottomStyle}></div>
             </div>
         )
     }

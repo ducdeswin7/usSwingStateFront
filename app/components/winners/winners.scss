@@ -1,0 +1,15 @@
+.winners {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+
+	&:before {
+		position: absolute;
+		display: block;
+		content: '';
+		background: red;
+		height: 10px;
+		width: 100%;
+		top: 3rem;
+	}
+}

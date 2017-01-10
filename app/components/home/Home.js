@@ -9,13 +9,13 @@ import DataMap from '../dataMaps/DataMap';
 
 import ProgressBar from '../progressBar/ProgressBar';
 import Candidats from '../candidats/Candidats';
+import Winners from '../winners/Winners';
 
 class Home extends React.Component {
     constructor(props){
         super(props);
     }
     render() {
-console.log(this.props)
         return (
             <div className="home">
                 <div className="home_header">
@@ -24,9 +24,14 @@ console.log(this.props)
                 </div>
 
                 <DataMap regionData={this.props.regionData} />
+
                 <div className="home_candidats">
                     <div className="home_candidats_title">Biographies</div>
                     <Candidats />
+                </div>
+
+                <div className="home_period">
+                    <Winners />
                 </div>
             </div>
         )
