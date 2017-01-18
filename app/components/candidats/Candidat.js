@@ -20,12 +20,12 @@ class Candidat extends React.Component {
             backgroundImage: 'url('+ this.state.candidat.img +')'
         };
 
-
         let hexTopStyle = {
             top: '-31.8198px',
             borderTop: 'solid 4.8284px #ff0000',
             borderRight: 'solid 4.8284px #ff0000'
         };
+
         let hexBottomStyle = {
             borderBottom: 'solid 4.8284px #ff0000',
             borderLeft: 'solid 4.8284px #ff0000'

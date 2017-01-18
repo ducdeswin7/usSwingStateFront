@@ -5,6 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import statesDefaults from '../../data/states-defaults';
 import objectAssign from 'object-assign';
+import SkyLight from 'react-skylight';
 
 require('./datamaps.scss');
 
@@ -29,7 +30,8 @@ export default class DataMap extends React.Component {
         }, {});
         return objectAssign({}, statesDefaults, newData);
     }
-    renderMap(){
+    renderMap($this){
+
         return new Datamap({
             element: ReactDOM.findDOMNode(this),
             scope: 'usa',
@@ -56,16 +58,17 @@ export default class DataMap extends React.Component {
                 }
             },
             done: function(datamap) {
+
+                console.log('this', this);
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
 
-                    console.log(geography.properties.name);
+                    // alert(geography.properties.name);
 
+                    console.log('_this', $this);
+
+                    $this.refs.simpleDialog.show();
                 });
             }
-        }).labels({
-            labelColor: 'white',
-            fontFamily: 'Raleway',
-            fontSize: 16
         });
     }
     currentScreenWidth(){
@@ -74,6 +77,10 @@ export default class DataMap extends React.Component {
             document.body.clientWidth;
     }
     componentDidMount(){
+
+
+        console.log('didmount', this.props);
+
         const mapContainer = d3.select('#datamap-container');
         const initialScreenWidth = this.currentScreenWidth();
         const containerWidth = (initialScreenWidth < 1000) ?
@@ -81,7 +88,7 @@ export default class DataMap extends React.Component {
             { width: '1300px', height: '450px' }
 
         mapContainer.style(containerWidth);
-        this.datamap = this.renderMap();
+        this.datamap = this.renderMap( this );
         window.addEventListener('resize', () => {
             const currentScreenWidth = this.currentScreenWidth();
             const mapContainerWidth = mapContainer.style('width');
@@ -93,7 +100,7 @@ export default class DataMap extends React.Component {
                 });
                 this.datamap = this.renderMap();
             }
-            else if (this.currentScreenWidth() <= 600) {
+            else if (this.currentScreenWidnth() <= 600) {
                 d3.select('svg').remove();
                 mapContainer.style({
                     width: currentScreenWidth + 'px',
@@ -105,9 +112,13 @@ export default class DataMap extends React.Component {
     }
     componentDidUpdate(){
         this.datamap.updateChoropleth(this.redducedData());
+
+        console.log('didupdate', this.props);
     }
     componentWillUnmount(){
         d3.select('svg').remove();
+
+        console.log('unmount', this.props);
     }
     render() {
 
@@ -118,7 +129,16 @@ export default class DataMap extends React.Component {
 
         return (
             <div id="datamap-container" style={styleMap}
-            ></div>
+            >
+            >
+                {/*<section>*/}
+                    {/*<h1>React SkyLight</h1>*/}
+                    {/*<button onClick={() => this.refs.simpleDialog.show()}>Open Modal</button>*/}
+                {/*</section>*/}
+                <SkyLight hideOnOverlayClicked ref="simpleDialog" title="Hi, I'm a simple modal">
+                    Hello, I dont have any callback.
+                </SkyLight>
+            </div>
         );
     }
 }
