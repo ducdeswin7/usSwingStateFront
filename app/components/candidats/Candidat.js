@@ -1,4 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import SkyLight from 'react-skylight';
+import styles from '../dataMaps/skylightStyles'
 
 class Candidat extends React.Component {
     constructor(props) {
@@ -10,6 +13,10 @@ class Candidat extends React.Component {
                 color: "red"
             }
         }
+    }
+
+    selectedCandidat(  ) {
+        this.props.popin.refs.candidatPopin.show();
     }
 
     render() {
@@ -32,7 +39,7 @@ class Candidat extends React.Component {
         };
 
         return(
-            <div className="hexagon" style={hexagonStyle}>
+            <div className="hexagon" onClick={() => this.selectedCandidat()} style={hexagonStyle}>
                 <div className="hexTop" style={hexTopStyle}></div>
                 <div className="hexBottom" style={hexBottomStyle}></div>
             </div>

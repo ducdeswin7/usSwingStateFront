@@ -7,12 +7,21 @@ import statesDefaults from '../../data/states-defaults';
 import objectAssign from 'object-assign';
 import SkyLight from 'react-skylight';
 
+import styles from './skylightStyles';
+
 require('./datamaps.scss');
 
 export default class DataMap extends React.Component {
     constructor(props){
         super(props);
         this.datamap = null;
+
+        this.state = {
+            currentState: {
+                name: [],
+                data: []
+            }
+        }
     }
 
     linearPalleteScale(value){
@@ -59,12 +68,15 @@ export default class DataMap extends React.Component {
             },
             done: function(datamap) {
 
-                console.log('this', this);
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
 
                     // alert(geography.properties.name);
 
-                    console.log('_this', $this);
+                    $this.setState({
+                        currentState: {
+                            name: geography.properties.name
+                        }
+                    });
 
                     $this.refs.simpleDialog.show();
                 });
@@ -77,10 +89,6 @@ export default class DataMap extends React.Component {
             document.body.clientWidth;
     }
     componentDidMount(){
-
-
-        console.log('didmount', this.props);
-
         const mapContainer = d3.select('#datamap-container');
         const initialScreenWidth = this.currentScreenWidth();
         const containerWidth = (initialScreenWidth < 1000) ?
@@ -112,13 +120,9 @@ export default class DataMap extends React.Component {
     }
     componentDidUpdate(){
         this.datamap.updateChoropleth(this.redducedData());
-
-        console.log('didupdate', this.props);
     }
     componentWillUnmount(){
         d3.select('svg').remove();
-
-        console.log('unmount', this.props);
     }
     render() {
 
@@ -128,15 +132,9 @@ export default class DataMap extends React.Component {
         };
 
         return (
-            <div id="datamap-container" style={styleMap}
-            >
-            >
-                {/*<section>*/}
-                    {/*<h1>React SkyLight</h1>*/}
-                    {/*<button onClick={() => this.refs.simpleDialog.show()}>Open Modal</button>*/}
-                {/*</section>*/}
-                <SkyLight hideOnOverlayClicked ref="simpleDialog" title="Hi, I'm a simple modal">
-                    Hello, I dont have any callback.
+            <div id="datamap-container" style={styleMap}>
+                <SkyLight hideOnOverlayClicked dialogStyles={styles.skylightDialog} ref="simpleDialog" title="  ">
+                    Hello, you click on {this.state.currentState.name}
                 </SkyLight>
             </div>
         );

@@ -5,6 +5,8 @@ import SkyLight from 'react-skylight';
 
 require('./home.scss');
 
+import getInfos from '../../utils/ApiHelpers';
+
 import DataMap from '../dataMaps/DataMap';
 
 import ProgressBar from '../progressBar/ProgressBar';
@@ -14,7 +16,24 @@ import Winners from '../winners/Winners';
 class Home extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            currentState: {},
+            candidats: {}
+        }
     }
+
+    componentDidMount() {
+        getInfos()
+            .then(function (data) {
+
+                console.log(data);
+                this.setState({
+                    currentState: data.currentState,
+                    candidats: data.candidats
+                })
+            }.bind(this))
+    }
+
     render() {
         return (
             <div className="home">
@@ -27,7 +46,7 @@ class Home extends React.Component {
 
                 <div className="home_candidats">
                     <div className="home_candidats_title">Biographies</div>
-                    <Candidats />
+                    <Candidats candidats={this.state.candidats} />
                 </div>
 
                 <div className="home_period">
