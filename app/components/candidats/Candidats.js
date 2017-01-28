@@ -1,10 +1,10 @@
 import React from 'react';
-require('./candidat.scss');
-
 import SkyLight from 'react-skylight';
+require('./candidat.scss');
+require('./candidatPopin.scss');
 
 import Candidat from './Candidat';
-
+import CandidatProfile from './CandidatProfile';
 import styles from '../dataMaps/skylightStyles'
 
 class Candidats extends React.Component {
@@ -24,8 +24,6 @@ class Candidats extends React.Component {
         })
     }
     render() {
-
-        console.log('candidat', this)
         return(
             <div className="candidat-lists">
 
@@ -35,7 +33,7 @@ class Candidats extends React.Component {
                           dialogStyles={styles.skylightDialog}
                           closeButtonStyle={styles.closeButtonStyle}
                           ref="candidatPopin" title="">
-                    Hello
+                    <CandidatProfile />
                 </SkyLight>
 
                 <hr className="candidat-lists_hr"/>

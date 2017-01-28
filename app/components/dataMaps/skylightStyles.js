@@ -9,6 +9,7 @@ const styles = {
         backgroundColor: 'rgba(0,0,0,0.3)'
     },
     skylightDialog: {
+        backgroundColor: 'rgba(6, 13, 23, 0.85)',
         width: '90%',
         minHeight: '88%',
         height: '90%',
@@ -19,11 +20,11 @@ const styles = {
         marginTop: '2%',
         marginLeft: 'auto',
         marginRight: 'auto',
-        backgroundColor: '#fff',
         borderRadius: '2px',
         zIndex: 100,
         padding: '15px',
-        boxShadow: '0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28)'
+        boxShadow: '0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.4)',
+        overflowY: 'auto'
     },
     title: {
         marginTop: '0'
