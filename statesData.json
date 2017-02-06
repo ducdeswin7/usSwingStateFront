@@ -1,0 +1,57 @@
+{
+  "state": [
+    {
+      "name": "Floride",
+      "is_swing_state": true,
+      "elections": [
+        {
+          "year": 2016,
+          "content": "Trump win !",
+          "candidates": [
+            {
+              "first_name": "Hillary",
+              "last_name": "Clinton",
+              "campaign_slogan": "Stronger Together",
+              "biography": [],
+              "party": {
+                "party_name": "democrate",
+                "party_color": "bleu"
+              },
+              "elections": [],
+              "election": [],
+              "path": "zYeFkuI0WV.jpg"
+            },
+            {
+              "first_name": "Trump",
+              "last_name": "DOnald",
+              "campaign_slogan": "Make America Great Again",
+              "biography": [],
+              "party": {
+                "party_name": "Republicain",
+                "party_color": "rouge"
+              },
+              "elections": [],
+              "election": [],
+              "path": "xlR6UYjPvA.jpg"
+            }
+          ],
+          "candidate": {
+            "first_name": "Trump",
+            "last_name": "DOnald",
+            "campaign_slogan": "Make America Great Again",
+            "biography": [],
+            "party": {
+              "party_name": "Republicain",
+              "party_color": "rouge"
+            },
+            "elections": [],
+            "election": [],
+            "path": "xlR6UYjPvA.jpg"
+          }
+        }
+      ],
+      "state_data": [],
+      "result": []
+    }
+  ]
+}

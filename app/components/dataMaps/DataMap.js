@@ -10,6 +10,7 @@ import SkyLight from 'react-skylight';
 import styles from './skylightStyles';
 
 require('./datamaps.scss');
+require('./stateData.scss');
 
 export default class DataMap extends React.Component {
     constructor(props){
@@ -48,15 +49,15 @@ export default class DataMap extends React.Component {
             fills: {
                 'Republican': '#CC4731',
                 'Democrat': '#306596',
-                'Heavy Democrat': '#667FAF',
-                'Light Democrat': '#A9C0DE',
-                'Heavy Republican': '#CA5E5B',
-                'Light Republican': '#EAA9A8',
+                'Heavy Democrat': '#306596',
+                'Light Democrat': '#306596',
+                'Heavy Republican': '#CC4731',
+                'Light Republican': '#CC4731',
                 defaultFill: 'yellow'
             },
             geographyConfig: {
                 borderWidth: 0.5,
-                highlightFillColor: 'red',
+                highlightFillColor: 'yellow',
                 popupTemplate: function(geography, data) {
 
                     if (data && data.value) {
@@ -134,7 +135,11 @@ export default class DataMap extends React.Component {
         return (
             <div id="datamap-container" style={styleMap}>
                 <SkyLight hideOnOverlayClicked dialogStyles={styles.skylightDialog} ref="simpleDialog" title="  ">
-                    Hello, you click on {this.state.currentState.name}
+                    <div className="state-data">
+                        <div className="state-data_header">
+                            <h1 className="state-data_header_title">{this.state.currentState.name}</h1>
+                        </div>
+                    </div>
                 </SkyLight>
             </div>
         );

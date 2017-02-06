@@ -32,8 +32,6 @@ class ProgressBar extends React.Component {
             backgroundColor: 'grey',
         };
 
-        console.log(this.state);
-
         return (
             <div className="progress">
                 <div className="progress_bar">

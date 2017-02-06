@@ -26,7 +26,7 @@ class Home extends React.Component {
         getInfos()
             .then(function (data) {
 
-                console.log(data);
+                console.log('data', data);
                 this.setState({
                     currentState: data.currentState,
                     candidats: data.candidats

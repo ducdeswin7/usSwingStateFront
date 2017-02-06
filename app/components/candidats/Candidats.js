@@ -17,8 +17,6 @@ class Candidats extends React.Component {
     }
 
     componentWillReceiveProps(nextprops) {
-
-        console.log('nextprops', nextprops)
         this.setState({
             candidats: this.props.candidats,
         })
