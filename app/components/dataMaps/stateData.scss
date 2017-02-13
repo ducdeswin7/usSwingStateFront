@@ -138,5 +138,39 @@
 				}
 			}
 		}
+
+		&_figures {
+			display: flex;
+			justify-content: center;
+			border-bottom: 1px solid #194054;
+
+			&:nth-child(2) {
+				margin-bottom: 2rem;
+			}
+
+			&_block {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 2rem;
+				border-left: 1px solid #194054;
+
+				&:nth-child(1) {
+					border-left: none;
+				}
+				&_img {
+					width: 9rem;
+				}
+				&_text {
+					text-align: center;
+					margin-top: 10px;
+					background-image: linear-gradient(to left, #14a8cc 0%, #1ee9f1 100%);
+					-webkit-background-clip: text;
+					-webkit-text-fill-color: transparent;
+					font-weight: 700;
+				}
+			}
+		}
 	}
 }
