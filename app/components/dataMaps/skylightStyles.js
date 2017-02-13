@@ -22,7 +22,7 @@ const styles = {
         marginRight: 'auto',
         borderRadius: '2px',
         zIndex: 100,
-        padding: '15px',
+        padding: '0',
         boxShadow: '0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.4)',
         overflowY: 'auto'
     },

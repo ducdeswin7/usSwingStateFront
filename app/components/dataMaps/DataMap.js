@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import statesDefaults from '../../data/states-defaults';
 import objectAssign from 'object-assign';
 import SkyLight from 'react-skylight';
+import StateData from './stateData/StateData';
 
 import styles from './skylightStyles';
 
@@ -20,7 +21,7 @@ export default class DataMap extends React.Component {
         this.state = {
             currentState: {
                 name: [],
-                data: []
+                data: {}
             }
         }
     }
@@ -31,7 +32,7 @@ export default class DataMap extends React.Component {
         const maxVal = Math.max(...dataValues);
 
         // those state color
-        return d3.scale.linear().domain([minVal, maxVal]).range(["#CC4731","#02386F"])(value);
+        return d3.scale.linear().domain([minVal, maxVal]).range(["#0e1b29","#02386F"])(value);
     }
     redducedData(){
         const newData = this.props.regionData.reduce((object, data) => {
@@ -47,17 +48,17 @@ export default class DataMap extends React.Component {
             scope: 'usa',
             data: this.redducedData(),
             fills: {
-                'Republican': '#CC4731',
-                'Democrat': '#306596',
-                'Heavy Democrat': '#306596',
-                'Light Democrat': '#306596',
-                'Heavy Republican': '#CC4731',
-                'Light Republican': '#CC4731',
-                defaultFill: 'yellow'
+                'Republican': '#0e1b29',
+                'Democrat': '#0e1b29',
+                'Heavy Democrat': '#0e1b29',
+                'Light Democrat': '#0e1b29',
+                'Heavy Republican': '#0e1b29',
+                'Light Republican': '#0e1b29',
+                defaultFill: '#0e1b29'
             },
             geographyConfig: {
-                borderWidth: 0.5,
-                highlightFillColor: 'yellow',
+                borderWidth: 0.3,
+                highlightFillColor: '#284f77',
                 popupTemplate: function(geography, data) {
 
                     if (data && data.value) {
@@ -70,8 +71,6 @@ export default class DataMap extends React.Component {
             done: function(datamap) {
 
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-
-                    // alert(geography.properties.name);
 
                     $this.setState({
                         currentState: {
@@ -135,11 +134,7 @@ export default class DataMap extends React.Component {
         return (
             <div id="datamap-container" style={styleMap}>
                 <SkyLight hideOnOverlayClicked dialogStyles={styles.skylightDialog} ref="simpleDialog" title="  ">
-                    <div className="state-data">
-                        <div className="state-data_header">
-                            <h1 className="state-data_header_title">{this.state.currentState.name}</h1>
-                        </div>
-                    </div>
+                    <StateData state={ this.state.currentState.name }/>
                 </SkyLight>
             </div>
         );

@@ -39,7 +39,7 @@ class Home extends React.Component {
             <div className="home">
                 <div className="home_header">
                     <h1 className="home_header_title">Grands electeurs</h1>
-                    <ProgressBar />
+                    <ProgressBar showDetails="true"/>
                 </div>
 
                 <DataMap regionData={this.props.regionData} />
