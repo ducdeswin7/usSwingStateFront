@@ -13,8 +13,9 @@ class ElectoralCollege extends React.Component {
 
         let barChartData = {
             labels: ["2001", "2002", "2003", "2004", "2005"],
-            datasets: [{
-                fillColor: "#1EBBDD",
+            datasets: [
+                {
+                fillColor: ["rgba(220,220,220,0.5)", "navy", "red", "orange"],
                 strokeColor: "transparent",
                 borderColor: "transparent",
                 data: [
@@ -24,7 +25,8 @@ class ElectoralCollege extends React.Component {
                     '40',
                     '50',
                 ]
-            }]
+            }
+            ]
         };
 
         return (

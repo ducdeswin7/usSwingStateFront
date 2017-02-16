@@ -34,6 +34,7 @@ export default class DataMap extends React.Component {
         // those state color
         return d3.scale.linear().domain([minVal, maxVal]).range(["#0e1b29","#02386F"])(value);
     }
+
     redducedData(){
         const newData = this.props.regionData.reduce((object, data) => {
             object[data.code] = { value: data.value, fillColor: this.linearPalleteScale(data.value) };
@@ -41,6 +42,7 @@ export default class DataMap extends React.Component {
         }, {});
         return objectAssign({}, statesDefaults, newData);
     }
+
     renderMap($this){
 
         return new Datamap({
@@ -83,11 +85,13 @@ export default class DataMap extends React.Component {
             }
         });
     }
+
     currentScreenWidth(){
         return window.innerWidth ||
             document.documentElement.clientWidth ||
             document.body.clientWidth;
     }
+
     componentDidMount(){
         const mapContainer = d3.select('#datamap-container');
         const initialScreenWidth = this.currentScreenWidth();
@@ -118,12 +122,15 @@ export default class DataMap extends React.Component {
             }
         });
     }
+
     componentDidUpdate(){
         this.datamap.updateChoropleth(this.redducedData());
     }
+
     componentWillUnmount(){
         d3.select('svg').remove();
     }
+
     render() {
 
         let styleMap = {

@@ -4,6 +4,7 @@ import PreElections from './preElections';
 import ElectoralCollege from './ElectoralCollege';
 import ProgressBarInfo from '../../progressBar/ProgressBarInfo';
 import InformationsText from './InformationsText';
+import KeyFigures from './KeyFigures';
 
 class StateData extends React.Component {
     render() {
@@ -51,67 +52,8 @@ class StateData extends React.Component {
                         Key Figures
                     </h2>
 
-                    <div className="state-data_content_figures">
-                        <div className="state-data_content_figures_block">
-                            <img className="state-data_content_figures_block_img" src="../../../public/images/group.png" alt=""/>
-                            <p className="state-data_content_figures_block_text">
-                                12,968,858 active registered <br/>
-                                voters in Florida
-                            </p>
-                        </div>
-                        <div className="state-data_content_figures_block">
-                            <img className="state-data_content_figures_block_img" src="../../../public/images/female.png" alt=""/>
-                            <p className="state-data_content_figures_block_text">
-                                12,968,858 active registered <br/>
-                                voters in Florida
-                            </p>
-                        </div>
-                        <div className="state-data_content_figures_block">
-                            <img className="state-data_content_figures_block_img" src="../../../public/images/group.png" alt=""/>
-                            <p className="state-data_content_figures_block_text">
-                                12,968,858 active registered <br/>
-                                voters in Florida
-                            </p>
-                        </div>
-                        <div className="state-data_content_figures_block">
-                            <img className="state-data_content_figures_block_img" src="../../../public/images/group.png" alt=""/>
-                            <p className="state-data_content_figures_block_text">
-                                12,968,858 active registered <br/>
-                                voters in Florida
-                            </p>
-                        </div>
-                    </div>
+                    <KeyFigures />
 
-                    <div className="state-data_content_figures">
-                        <div className="state-data_content_figures_block">
-                            <img className="state-data_content_figures_block_img" src="../../../public/images/group.png" alt=""/>
-                            <p className="state-data_content_figures_block_text">
-                                12,968,858 active registered <br/>
-                                voters in Florida
-                            </p>
-                        </div>
-                        <div className="state-data_content_figures_block">
-                            <img className="state-data_content_figures_block_img" src="../../../public/images/group.png" alt=""/>
-                            <p className="state-data_content_figures_block_text">
-                                12,968,858 active registered <br/>
-                                voters in Florida
-                            </p>
-                        </div>
-                        <div className="state-data_content_figures_block">
-                            <img className="state-data_content_figures_block_img" src="../../../public/images/group.png" alt=""/>
-                            <p className="state-data_content_figures_block_text">
-                                12,968,858 active registered <br/>
-                                voters in Florida
-                            </p>
-                        </div>
-                        <div className="state-data_content_figures_block">
-                            <img className="state-data_content_figures_block_img" src="../../../public/images/group.png" alt=""/>
-                            <p className="state-data_content_figures_block_text">
-                                12,968,858 active registered <br/>
-                                voters in Florida
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
         )

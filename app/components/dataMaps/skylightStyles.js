@@ -33,9 +33,11 @@ const styles = {
         cursor: 'pointer',
         position: 'absolute',
         fontSize: '4em',
-        color: '#DA243A',
-        right: '10px',
-        top: '0'
+        background: '#d9372d',
+        right: '0',
+        padding: "0px 15px",
+        top: '0',
+        color: 'white'
     }
 };
 

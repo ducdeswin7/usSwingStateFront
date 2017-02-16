@@ -160,7 +160,7 @@
 					border-left: none;
 				}
 				&_img {
-					width: 9rem;
+					width: 6rem;
 				}
 				&_text {
 					text-align: center;
@@ -169,6 +169,17 @@
 					-webkit-background-clip: text;
 					-webkit-text-fill-color: transparent;
 					font-weight: 700;
+				}
+
+				canvas {
+					position: relative;
+				}
+
+				&_count {
+					position: absolute;
+					font-size: 1.5rem;
+					font-weight: 800;
+					margin-top: -20px;
 				}
 			}
 		}

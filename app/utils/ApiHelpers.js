@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 function getCandidatsInfos() {
-    return axios.get(`https://jsonplaceholder.typicode.com/posts/2`);
+    return axios.get('http://unitedswingstates.com/api/v1/list/state');
 }
 
 function getStateInfos() {
