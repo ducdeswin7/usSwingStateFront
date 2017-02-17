@@ -10,8 +10,6 @@ import getInfos from '../../utils/ApiHelpers';
 import DataMap from '../dataMaps/DataMap';
 
 import ProgressBar from '../progressBar/ProgressBar';
-import Candidats from '../candidats/Candidats';
-import Winners from '../winners/Winners';
 
 class Home extends React.Component {
     constructor(props){
@@ -33,6 +31,7 @@ class Home extends React.Component {
     }
 
     render() {
+        console.log('homestate', this.state);
         return (
             <div className="home">
                 <div className="home_header">
@@ -42,14 +41,7 @@ class Home extends React.Component {
 
                 <DataMap regionData={this.props.regionData} />
 
-                <div className="home_candidats">
-                    <div className="home_candidats_title">Biographies</div>
-                    <Candidats candidats={this.state.candidats} />
-                </div>
 
-                <div className="home_period">
-                    <Winners />
-                </div>
             </div>
         )
     }

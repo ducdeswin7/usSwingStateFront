@@ -23,27 +23,13 @@ class Candidat extends React.Component {
 
     render() {
 
-        let hexagonStyle = {
-            borderLeft: 'solid 2px #ff0000',
-            borderRight: 'solid 2px #ff0000',
-            backgroundImage: 'url('+ this.state.candidat.img +')'
-        };
-
-        let hexTopStyle = {
-            top: '-31.8198px',
-            borderTop: 'solid 4.8284px #ff0000',
-            borderRight: 'solid 4.8284px #ff0000'
-        };
-
-        let hexBottomStyle = {
-            borderBottom: 'solid 4.8284px #ff0000',
-            borderLeft: 'solid 4.8284px #ff0000'
+        let borderStyle = {
+          border: '4px solid #c90e47'
         };
 
         return(
-            <div className="hexagon" onClick={() => this.selectedCandidat()} style={hexagonStyle}>
-                <div className="hexTop" style={hexTopStyle}></div>
-                <div className="hexBottom" style={hexBottomStyle}></div>
+            <div className="president" onClick={() => this.selectedCandidat()}>
+                <img src={this.state.candidat.img} className="president_img" alt="president image"/>
             </div>
         )
     }

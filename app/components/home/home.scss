@@ -18,11 +18,19 @@
 			font-weight: 900;
 		}
 	}
+	&_informations {
+		position: absolute;
+		bottom: 1rem;
+		left: 0;
+		right: 0;
+		padding: 0 2rem;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		box-sizing: border-box;
+	}
 	
 	&_candidats {
-		position: absolute;
-		bottom: 2rem;
-		left: 2rem;
 		&_title {
 			text-align: center;
 			margin-bottom: 1rem;
@@ -32,10 +40,56 @@
 	}
 
 	&_period {
-		position: absolute;
-		bottom: 2rem;
-		right: 2rem;
-		min-width: 500px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		min-width: 390px;
 	}
 
+	&_data {
+		color: #ffffff;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+
+		&_state {
+			background-image: linear-gradient(to left, #d97908 0%, #d90847 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			color: #1c2432;
+			font-size: 50px;
+			font-weight: 700;
+			text-transform: uppercase;
+			margin-right: 2rem;
+		}
+		&_info {
+			width: 135px;
+			height: 135px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 50%;
+			border: 7px solid #d93f28;
+			box-sizing: content-box;
+			flex-direction: column;
+			margin-right: 2rem;
+
+			&_percent {
+				background-image: linear-gradient(to left, #d97908 0%, #d90847 100%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				color: #1c2432;
+				font-size: 30px;
+				font-weight: 700;
+				margin-bottom: 5px;
+			}
+
+			&_text {
+				color: #ffffff;
+				font-size: 12px;
+				font-weight: 400;
+				text-align: center;
+			}
+		}
+	}
 }

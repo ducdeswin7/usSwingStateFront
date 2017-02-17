@@ -2,14 +2,14 @@
 	display: flex;
 	justify-content: space-between;
 	position: relative;
-
-	&:before {
-		position: absolute;
-		display: block;
-		content: '';
-		background: red;
-		height: 4px;
-		width: 100%;
-		top: 50px;
-	}
+	width: 100%;
+	//&:before {
+	//	position: absolute;
+	//	display: block;
+	//	content: '';
+	//	background: red;
+	//	height: 4px;
+	//	width: 100%;
+	//	top: 50px;
+	//}
 }

@@ -9,6 +9,7 @@ import SkyLight from 'react-skylight';
 import StateData from './stateData/StateData';
 
 import styles from './skylightStyles';
+import HomeData from '../home/HomeData';
 
 require('./datamaps.scss');
 require('./stateData.scss');
@@ -139,11 +140,14 @@ export default class DataMap extends React.Component {
         };
 
         return (
-            <div id="datamap-container" style={styleMap}>
-                <SkyLight hideOnOverlayClicked dialogStyles={styles.skylightDialog} ref="simpleDialog" title="  ">
-                    <StateData state={ this.state.currentState.name }/>
-                </SkyLight>
-            </div>
+                <div id="datamap-container" style={styleMap}>
+                    <SkyLight hideOnOverlayClicked dialogStyles={styles.skylightDialog} ref="simpleDialog" title="  ">
+                        <StateData state={ this.state.currentState.name }/>
+                    </SkyLight>
+                    <HomeData candidats={this.state.candidats} state={this.state.currentState} />
+
+                </div>
+
         );
     }
 }
