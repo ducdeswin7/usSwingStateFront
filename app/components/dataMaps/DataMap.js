@@ -10,6 +10,7 @@ import StateData from './stateData/StateData';
 
 import styles from './skylightStyles';
 import HomeData from '../home/HomeData';
+import {getStateInfos} from '../../utils/ApiHelpers';
 
 require('./datamaps.scss');
 require('./stateData.scss');
@@ -20,10 +21,7 @@ export default class DataMap extends React.Component {
         this.datamap = null;
 
         this.state = {
-            currentState: {
-                name: [],
-                data: {}
-            }
+            currentState: {}
         }
     }
 
@@ -75,11 +73,16 @@ export default class DataMap extends React.Component {
 
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
 
-                    $this.setState({
-                        currentState: {
-                            name: geography.properties.name
-                        }
-                    });
+                    console.log('selected', geography.properties.name);
+
+                    getStateInfos("florida")
+                        .then(function (data) {
+                            console.log('api', data);
+
+                            $this.setState({
+                                currentState: data.stateCurrent
+                            })
+                        }.bind(this));
 
                     $this.refs.simpleDialog.show();
                 });
@@ -142,10 +145,10 @@ export default class DataMap extends React.Component {
         return (
                 <div id="datamap-container" style={styleMap}>
                     <SkyLight hideOnOverlayClicked dialogStyles={styles.skylightDialog} ref="simpleDialog" title="  ">
-                        <StateData state={ this.state.currentState.name }/>
+                        <StateData state={ this.state.currentState }/>
                     </SkyLight>
-                    <HomeData candidats={this.state.candidats} state={this.state.currentState} />
 
+                    <HomeData candidats={this.state.candidats} state={this.state.currentState} />
                 </div>
 
         );

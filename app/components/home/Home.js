@@ -15,25 +15,17 @@ class Home extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            currentState: {},
+            selectedState: {},
             candidats: {}
         }
     }
 
-    componentDidMount() {
-        getInfos()
-            .then(function (data) {
-                this.setState({
-                    currentState: data.currentState,
-                    candidats: data.candidats
-                })
-            }.bind(this))
-    }
-
     render() {
-        console.log('homestate', this.state);
         return (
             <div className="home">
+                <div className="home_search">
+                    <i class="material-icons">search</i>
+                </div>
                 <div className="home_header">
                     <h1 className="home_header_title">Grands electeurs</h1>
                     <ProgressBar showDetails="true"/>

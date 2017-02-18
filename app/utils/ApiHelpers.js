@@ -4,11 +4,12 @@ function getCandidatsInfos() {
     return axios.get('http://unitedswingstates.com/api/v1/list/state');
 }
 
-function getStateInfos() {
-    return axios.get(`https://jsonplaceholder.typicode.com/posts/2`);
+export function getStateInfos(statename) {
+    return axios.get(`http://unitedswingstates.com/api/v1/list/state/${statename}`)
+        .then((response) => ({stateCurrent: response.data}));
 }
 
-export default function getInfos() {
-    return axios.all([getCandidatsInfos(), getStateInfos()])
-        .then((arr) => ({candidats: arr[0].data, currentState: arr[1].data}))
+export default function getInfos(statename) {
+    return axios.all([getCandidatsInfos(), getStateInfos(statename)])
+        .then((arr) => ({candidats: arr[0].data, selectedState: arr[1].data}))
 };

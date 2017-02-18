@@ -8,13 +8,6 @@ import styles from '../dataMaps/skylightStyles'
 class Candidat extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            candidat: {
-                img: "http://placekitten.com/240/240",
-                color: "red"
-            }
-        }
     }
 
     selectedCandidat(  ) {
@@ -24,15 +17,20 @@ class Candidat extends React.Component {
     render() {
 
         let borderStyle = {
-          border: '4px solid #c90e47'
+          border: '4px solid ' + this.props.color
         };
 
         return(
             <div className="president" onClick={() => this.selectedCandidat()}>
-                <img src={this.state.candidat.img} className="president_img" alt="president image"/>
+                <img src={this.props.image} style={borderStyle} className="president_img" alt="president image"/>
             </div>
         )
     }
 }
+
+Candidat.propTypes = {
+    color: React.PropTypes.string.isRequired,
+    image: React.PropTypes.string.isRequired,
+};
 
 export default Candidat;

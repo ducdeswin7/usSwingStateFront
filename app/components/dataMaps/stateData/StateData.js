@@ -11,7 +11,7 @@ class StateData extends React.Component {
         return (
             <div className="state-data">
                 <div className="state-data_header">
-                    <h1 className="state-data_header_title">{this.props.state}</h1>
+                    <h1 className="state-data_header_title">{this.props.state.name}</h1>
                 </div>
                 <div className="state-data_content">
                     <h2 className="state-data_content_title">
