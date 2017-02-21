@@ -4,13 +4,15 @@ class CandidatProfile extends React.Component {
     render() {
         var imgProfileUrl = "https://pmctvline2.files.wordpress.com/2016/08/the-simpsons-donald-trump-episode.jpg";
 
+        console.log('on profile data', this.props.selectedCandidate);
+
         return(
             <div className="profile">
                 <div className="header">
-                    <img src={imgProfileUrl} className="header_img" alt="Candidat picture"/>
+                    <img src={'http://unitedswingstates.com/uploads/candidates/' + this.props.selectedCandidate.path} className="header_img" alt="Candidat picture"/>
                 </div>
-                <h1 className="profile_title">Donald Trump</h1>
-                <h2 className="profile_slogan">« Make the america great again »</h2>
+                <h1 className="profile_title">{this.props.selectedCandidate.last_name} {this.props.selectedCandidate.first_name}</h1>
+                <h2 className="profile_slogan">« {this.props.selectedCandidate.campaign_slogan} »</h2>
 
 
                 <div className="informations">

@@ -7,12 +7,12 @@ import Candidat from './Candidat';
 import CandidatProfile from './CandidatProfile';
 import styles from '../dataMaps/skylightStyles'
 
-class Candidats extends React.Component {
+class candidates extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            candidats: {
+            candidates: {
                 trump: {
                     color: "#d93d29",
                     imageUrl: "http://media3.s-nbcnews.com/j/newscms/2016_20/1541946/160518-trump-portrait-jsw-145p_1c226e6636be4572928409c157f0d50a.nbcnews-ux-2880-1000.jpg"
@@ -21,36 +21,56 @@ class Candidats extends React.Component {
                     color: '#18bdda',
                     imageUrl: "https://www.thenation.com/wp-content/uploads/2016/10/Clinton_PlannedParenthood_rtr_img.jpg"
                 }
-            }
+            },
+            selectedCandidate: {}
         }
     }
 
-    // componentWillReceiveProps(nextprops) {
-    //     this.setState({
-    //         candidats: this.props.candidats,
-    //     })
-    // }
+    setSelectedCandidate(candidatData) {
+        this.setState({
+            selectedCandidate: candidatData
+        })
+    }
+
+    selectedCandidat(candidatData) {
+        this.refs.candidatPopin.show();
+        this.setSelectedCandidate(candidatData)
+    }
+
+    createListCandidate() {
+        if(this.props.candidates) {
+            return this.props.candidates.map((candidate, i) => {
+
+                console.log('hello marlo', candidate);
+
+                let borderStyle = {
+                    border: '4px solid ' + candidate.party.party_color
+                };
+
+                return (
+                    <div className="president" key={i} onClick={() => this.selectedCandidat(candidate)}>
+                        <img src={'http://unitedswingstates.com/uploads/candidates/' + candidate.path} style={borderStyle} className="president_img" alt="president image"/>
+                    </div>
+                )}
+            )
+        }
+    }
+
     render() {
-        console.log('candidats', this.props);
-
         return(
-            <div className="candidat-lists">
+        <div className="candidat-lists">
 
-                <Candidat color={this.state.candidats.trump.color} image={this.state.candidats.trump.imageUrl} popin={this} />
+            <SkyLight hideOnOverlayClicked
+                      dialogStyles={styles.skylightDialog}
+                      closeButtonStyle={styles.closeButtonStyle}
+                      ref="candidatPopin" title="">
+                <CandidatProfile selectedCandidate={this.state.selectedCandidate} />
+            </SkyLight>
 
-                <SkyLight hideOnOverlayClicked
-                          dialogStyles={styles.skylightDialog}
-                          closeButtonStyle={styles.closeButtonStyle}
-                          ref="candidatPopin" title="">
-                    <CandidatProfile />
-                </SkyLight>
-
-                <hr className="candidat-lists_hr"/>
-
-                <Candidat color={this.state.candidats.hillary.color} image={this.state.candidats.hillary.imageUrl} popin={this} />
-            </div>
+            {this.createListCandidate()}
+        </div>
         )
     }
 }
 
-export default Candidats;
+export default candidates;

@@ -20,5 +20,12 @@
 		width: 60px;
 		height: 60px;
 		border-radius: 50%;
+		&:nth-child(1) {
+		}
 	}
+}
+
+.candidat-lists .president img {
+	margin-right: 1.5rem;
+	margin-left: 1.5rem;
 }

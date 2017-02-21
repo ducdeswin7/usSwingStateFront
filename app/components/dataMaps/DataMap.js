@@ -1,5 +1,4 @@
 import d3 from 'd3';
-import topojson from 'topojson';
 import Datamap from 'datamaps/dist/datamaps.usa.min'
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -7,7 +6,6 @@ import statesDefaults from '../../data/states-defaults';
 import objectAssign from 'object-assign';
 import SkyLight from 'react-skylight';
 import StateData from './stateData/StateData';
-
 import styles from './skylightStyles';
 import HomeData from '../home/HomeData';
 import {getStateInfos} from '../../utils/ApiHelpers';

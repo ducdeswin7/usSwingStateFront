@@ -3,22 +3,34 @@ let _ = require('lodash');
 
 import Candidats from '../candidats/Candidats';
 import Winners from '../winners/Winners';
+import {getStateInfos, getElectionCandidat} from '../../utils/ApiHelpers';
 
 class HomeData extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {}
+    }
+
+    componentDidMount() {
+        getElectionCandidat("2016").then((resp) => {
+            console.log(resp);
+
+            this.setState({
+                candidates: resp.candidates[0].candidates
+            })
+        })
     }
 
     render() {
 
-        // console.log(Object.getOwnPropertyNames(this.props.state).length > 0);
-        console.log('verification', this.props);
+        console.log('verification', this.state.candidates);
 
         return (
             <div className="home_informations">
                 <div className="home_candidats">
                     <div className="home_candidats_title">Biographies</div>
-                    <Candidats candidats={this.props.candidats} />
+                    <Candidats candidates={this.state.candidates} />
                 </div>
 
                 {/*{Object.getOwnPropertyNames(this.props.state).length > 0 ?*/}
