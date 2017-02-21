@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-function getCandidatsInfos() {
-    return axios.get('http://unitedswingstates.com/api/v1/list/state');
+export function getCandidatsInfos(presidentName) {
+    return axios.get(`http://unitedswingstates.com/api/v1/list/candidate/${presidentName}`)
+        .then((response) => ({candidate: response.data}));
 }
 
 export function getStateInfos(statename) {
@@ -9,7 +10,7 @@ export function getStateInfos(statename) {
         .then((response) => ({stateCurrent: response.data}));
 }
 
-export default function getInfos(statename) {
-    return axios.all([getCandidatsInfos(), getStateInfos(statename)])
+export default function getInfos(statename, presidentName) {
+    return axios.all([getCandidatsInfos(presidentName), getStateInfos(statename)])
         .then((arr) => ({candidats: arr[0].data, selectedState: arr[1].data}))
 };

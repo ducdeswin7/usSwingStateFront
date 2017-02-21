@@ -24,7 +24,7 @@ class Home extends React.Component {
         return (
             <div className="home">
                 <div className="home_search">
-                    <i class="material-icons">search</i>
+                    <i className="material-icons">search</i>
                 </div>
                 <div className="home_header">
                     <h1 className="home_header_title">Grands electeurs</h1>
@@ -32,8 +32,6 @@ class Home extends React.Component {
                 </div>
 
                 <DataMap regionData={this.props.regionData} />
-
-
             </div>
         )
     }

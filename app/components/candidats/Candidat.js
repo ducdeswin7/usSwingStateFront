@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom';
 import SkyLight from 'react-skylight';
 import styles from '../dataMaps/skylightStyles'
 
-
-
 class Candidat extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    selectedCandidat(  ) {
+    selectedCandidat() {
         this.props.popin.refs.candidatPopin.show();
     }
 

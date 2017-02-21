@@ -73,12 +73,8 @@ export default class DataMap extends React.Component {
 
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
 
-                    console.log('selected', geography.properties.name);
-
                     getStateInfos("florida")
                         .then(function (data) {
-                            console.log('api', data);
-
                             $this.setState({
                                 currentState: data.stateCurrent
                             })
@@ -141,6 +137,9 @@ export default class DataMap extends React.Component {
             margin: '0px auto',
             paddingTop: '10rem',
         };
+
+        console.log('state', this.state);
+
 
         return (
                 <div id="datamap-container" style={styleMap}>

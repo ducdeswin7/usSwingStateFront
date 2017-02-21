@@ -25,12 +25,14 @@ class Candidats extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextprops) {
-        this.setState({
-            candidats: this.props.candidats,
-        })
-    }
+    // componentWillReceiveProps(nextprops) {
+    //     this.setState({
+    //         candidats: this.props.candidats,
+    //     })
+    // }
     render() {
+        console.log('candidats', this.props);
+
         return(
             <div className="candidat-lists">
 

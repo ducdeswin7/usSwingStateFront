@@ -1,6 +1,10 @@
 import React from 'react';
 import Candidat from '../candidats/Candidat';
+import SkyLight from 'react-skylight';
 
+import styles from '../dataMaps/skylightStyles'
+
+import CandidatProfile from '../candidats/CandidatProfile';
 require('./winners.scss');
 
 class Winners extends React.Component {
@@ -22,19 +26,29 @@ class Winners extends React.Component {
     }
 
     render() {
+        console.log(this.state)
+
         return(
             <div className="winners">
+
+                <SkyLight hideOnOverlayClicked
+                          dialogStyles={styles.skylightDialog}
+                          closeButtonStyle={styles.closeButtonStyle}
+                          ref="candidatPopin" title="candidat popin ">
+                    <CandidatProfile />
+                </SkyLight>
+
                 <div className="winners_block">
                     <h3 className="winners_block_year">2016</h3>
-                    <Candidat color={this.state.winners.trump.color} image={this.state.winners.trump.imageUrl} />
+                    <Candidat color={this.state.winners.trump.color} image={this.state.winners.trump.imageUrl} popin={this} />
                 </div>
                 <div className="winners_block">
                     <h3 className="winners_block_year">2012</h3>
-                    <Candidat color={this.state.winners.obama.color} image={this.state.winners.obama.imageUrl} />
+                    <Candidat color={this.state.winners.obama.color} image={this.state.winners.obama.imageUrl} popin={this} />
                 </div>
                 <div className="winners_block">
                     <h3 className="winners_block_year">2008</h3>
-                    <Candidat color={this.state.winners.obama.color} image={this.state.winners.obama.imageUrl} />
+                    <Candidat color={this.state.winners.obama.color} image={this.state.winners.obama.imageUrl} popin={this} />
                 </div>
             </div>
         )
