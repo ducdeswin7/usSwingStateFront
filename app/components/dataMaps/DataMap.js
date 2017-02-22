@@ -33,6 +33,13 @@ export default class DataMap extends React.Component {
                 "Virginia",
                 "Wisconsin"
             ],
+            swingStatesFinished: [
+                { name: "Florida", party: "republican"},
+                { name: "Iowa", party: "republican"},
+                { name: "North Carolina", party: "republican"},
+                { name: "Ohio", party: "democrat"},
+                { name: "Pennsylvania", party: "democrat"}
+            ],
             currentState: {}
         }
     }
@@ -49,7 +56,21 @@ export default class DataMap extends React.Component {
         return objectAssign({}, statesDefaults, newData);
     }
 
+    showStateInformations(){
+        getStateInfos("florida")
+            .then(function (data) {
+                console.log(data)
+                this.setState({
+                    currentState: data.stateCurrent
+                })
+            }.bind(this));
+
+        this.refs.simpleDialog.show();
+    }
     renderMap($this){
+        console.log('redducedData ' , this.props.regionData)
+
+
         let map =  new Datamap({
             element: ReactDOM.findDOMNode(this),
             scope: 'usa',
@@ -57,7 +78,7 @@ export default class DataMap extends React.Component {
             fills: {
                 'Republican': '#d92438',
                 'Democrat': '#13a1c9',
-                'SS': '#0e1b29',
+                'SS': '#BF9E5A',
                 'Light Democrat': '#0e1b29',
                 'Heavy Republican': '#0e1b29',
                 'Light Republican': '#0e1b29',
@@ -69,32 +90,19 @@ export default class DataMap extends React.Component {
                 borderOpacity: .4,
                 highlightFillColor: '#1c3854',
                 popupTemplate: function(geography, data) {
-
-                    if (data && data.value) {
-                        return '<div class="popup-maps"><strong>' + geography.properties.name + ', ' + data.value + '</strong></div>';
-                    } else {
-                        return '<div class="popup-maps"><strong>' + geography.properties.name + '</strong></div>';
-                    }
+                    return '<div class="popup-maps"><strong>' + geography.properties.name + '</strong></div>';
                 }
             },
             done: function(datamap) {
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-
-                    if ($this.state.swingStates.indexOf(geography.properties.name) > -1) {
-                        getStateInfos("florida")
-                            .then(function (data) {
-                                console.log(data)
-                                $this.setState({
-                                    currentState: data.stateCurrent
-                                })
-                            }.bind(this));
-
-                        $this.refs.simpleDialog.show();
+                    if ($this.state.swingStatesFinished.indexOf(geography.properties.name) > -1) {
+                        $this.showStateInformations();
                     }
                 });
             }
         });
-            map.addPlugin('markers', function(layer, data, options) {
+        map.addPlugin('markers', function(layer, data, options) {
+
             let self = this,
                 fillData = this.options.fills,
                 svg = this.svg;
@@ -103,20 +111,14 @@ export default class DataMap extends React.Component {
                 throw "Datamaps Error - bubbles must be an array";
             }
 
-            let bubbles = layer.selectAll('image.datamaps-markers').data(data, JSON.stringify),
-                party = 'democrate';
-
-            if( party == "democrate"){
-                var partyImage = 'http://unitedswingstates.com/uploads/states/vKQyrm4eiq.png';
-            }else{
-                var partyImage = 'http://unitedswingstates.com/uploads/states/XhmtcVPONY.png';
-            }
+            let bubbles = layer.selectAll('image.datamaps-markers').data(data, JSON.stringify);
+            let partyImage = data.party === "democrat" ? 'http://unitedswingstates.com/uploads/states/vKQyrm4eiq.png' : 'http://unitedswingstates.com/uploads/states/XhmtcVPONY.png';
 
             bubbles.enter()
                 .append('image')
                 .attr('class', 'datamaps-marker')
-                .attr('xlink:href', partyImage)
                 .attr('height', 51)
+                .attr('xlink:href', partyImage)
                 .attr('width', 60)
                 .attr('x', function(datum) {
                     let latLng;
@@ -136,9 +138,10 @@ export default class DataMap extends React.Component {
                     }
                     if (latLng) return latLng[1];
                 })
-
+                .on('click' , function () {
+                    $this.showStateInformations();
+                })
                 .on('mouseover', function(datum) {
-                    console.log('mousover!');
                     let $this = d3.select(this);
 
                     if (options.popupOnHover) {
@@ -158,8 +161,7 @@ export default class DataMap extends React.Component {
                     }
 
                     d3.selectAll('.datamaps-hoverover').style('display', 'none');
-                })
-
+                });
 
             bubbles.exit()
                 .transition()
@@ -177,20 +179,29 @@ export default class DataMap extends React.Component {
             name: 'Florida',
             latitude: 30,
             longitude: -83,
+            party: 'democrat',
         },{
             name: 'Ohio',
             latitude: 42,
             longitude: -84,
+            party: 'democrat',
+        },{
+            name: 'North Carolina ',
+            latitude: 36.9999,
+            longitude: -80,
+            party: 'republican',
         },{
             name: 'IOWA ',
             latitude: 44,
             longitude: -95,
+            party: 'republican',
         },{
-            name: 'Colorado',
-            latitude: 40.5,
-            longitude: -107.5,
+            name: 'Pennsylvania ',
+            latitude: 43,
+            longitude: -79,
+            party: 'republican',
         }], {
-            popupOnHover: true,
+            popupOnHover: false,
             popupTemplate: function(data) {
                 return "<div class='hoverinfo'>" + data.name + "</div>";
             }
@@ -234,9 +245,9 @@ export default class DataMap extends React.Component {
         });
     }
 
-    componentDidUpdate(){
-        this.datamap.updateChoropleth(this.redducedData());
-    }
+    // componentDidUpdate(){
+    //     this.datamap.updateChoropleth(this.redducedData());
+    // }
 
     componentWillUnmount(){
         d3.select('svg').remove();
