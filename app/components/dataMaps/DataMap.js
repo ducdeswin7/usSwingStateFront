@@ -22,14 +22,14 @@ export default class DataMap extends React.Component {
         this.state = {
             swingStates: [
                 "Colorado",
-                "Florida",
-                "Iowa",
+                "Florida",  // ok - R
+                "Iowa", // ok - R
                 "Michigan",
                 "Nevada",
                 "New Hampshire",
-                "North Carolina",
-                "Ohio",
-                "Pennsylvania",
+                "North Carolina", // ok - R
+                "Ohio", // ok - R
+                "Pennsylvania", // ok - R
                 "Virginia",
                 "Wisconsin"
             ],
@@ -40,31 +40,33 @@ export default class DataMap extends React.Component {
     redducedData(){
 
         const newData = this.props.regionData.reduce((object, data) => {
+
             object[data.code] = this.state.swingStates.indexOf(data.regionName) > -1 ?
                 { value: data.value, fillKey: 'SS' } : { value: data.value, fillKey: 'defaultFill' } ;
+
             return object;
         }, {});
         return objectAssign({}, statesDefaults, newData);
     }
 
     renderMap($this){
-
-        console.log(this.redducedData());
-        return new Datamap({
+        let map =  new Datamap({
             element: ReactDOM.findDOMNode(this),
             scope: 'usa',
             data: this.redducedData(),
             fills: {
-                'Republican': '#0e1b29',
-                'Democrat': '#0e1b29',
-                'SS': '#ab9966',
+                'Republican': '#d92438',
+                'Democrat': '#13a1c9',
+                'SS': '#0e1b29',
                 'Light Democrat': '#0e1b29',
                 'Heavy Republican': '#0e1b29',
                 'Light Republican': '#0e1b29',
-                'defaultFill': '#0e1b29'
+                'defaultFill': '#141a25'
             },
             geographyConfig: {
-                borderWidth: 0.3,
+                borderWidth: 1.8,
+                borderColor: '#1c3854',
+                borderOpacity: .4,
                 highlightFillColor: '#1c3854',
                 popupTemplate: function(geography, data) {
 
@@ -76,7 +78,6 @@ export default class DataMap extends React.Component {
                 }
             },
             done: function(datamap) {
-
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
 
                     if ($this.state.swingStates.indexOf(geography.properties.name) > -1) {
@@ -91,6 +92,107 @@ export default class DataMap extends React.Component {
                         $this.refs.simpleDialog.show();
                     }
                 });
+            }
+        });
+            map.addPlugin('markers', function(layer, data, options) {
+            let self = this,
+                fillData = this.options.fills,
+                svg = this.svg;
+
+            if (!data || (data && !data.slice)) {
+                throw "Datamaps Error - bubbles must be an array";
+            }
+
+            let bubbles = layer.selectAll('image.datamaps-markers').data(data, JSON.stringify),
+                party = 'democrate';
+
+            if( party == "democrate"){
+                var partyImage = 'http://unitedswingstates.com/uploads/states/vKQyrm4eiq.png';
+            }else{
+                var partyImage = 'http://unitedswingstates.com/uploads/states/XhmtcVPONY.png';
+            }
+
+            bubbles.enter()
+                .append('image')
+                .attr('class', 'datamaps-marker')
+                .attr('xlink:href', partyImage)
+                .attr('height', 51)
+                .attr('width', 60)
+                .attr('x', function(datum) {
+                    let latLng;
+                    if (datumHasCoords(datum)) {
+                        latLng = self.latLngToXY(datum.latitude, datum.longitude);
+                    } else if (datum.centered) {
+                        latLng = self.path.centroid(svg.select('path.' + datum.centered).data()[0]);
+                    }
+                    if (latLng) return latLng[0];
+                })
+                .attr('y', function(datum) {
+                    let latLng;
+                    if (datumHasCoords(datum)) {
+                        latLng = self.latLngToXY(datum.latitude, datum.longitude);
+                    } else if (datum.centered) {
+                        latLng = self.path.centroid(svg.select('path.' + datum.centered).data()[0]);
+                    }
+                    if (latLng) return latLng[1];
+                })
+
+                .on('mouseover', function(datum) {
+                    console.log('mousover!');
+                    let $this = d3.select(this);
+
+                    if (options.popupOnHover) {
+                        console.log('going', datum)
+                        self.updatePopup($this, datum, options, svg);
+                    }
+                })
+                .on('mouseout', function(datum) {
+                    let $this = d3.select(this);
+
+                    if (options.highlightOnHover) {
+                        //reapply previous attributes
+                        let previousAttributes = JSON.parse($this.attr('data-previousAttributes'));
+                        for (let attr in previousAttributes) {
+                            $this.style(attr, previousAttributes[attr]);
+                        }
+                    }
+
+                    d3.selectAll('.datamaps-hoverover').style('display', 'none');
+                })
+
+
+            bubbles.exit()
+                .transition()
+                .delay(options.exitDelay)
+                .attr("height", 0)
+                .remove();
+
+            function datumHasCoords(datum) {
+                return typeof datum !== 'undefined' && typeof datum.latitude !== 'undefined' && typeof datum.longitude !== 'undefined';
+            }
+
+        });
+
+        map.markers([{
+            name: 'Florida',
+            latitude: 30,
+            longitude: -83,
+        },{
+            name: 'Ohio',
+            latitude: 42,
+            longitude: -84,
+        },{
+            name: 'IOWA ',
+            latitude: 44,
+            longitude: -95,
+        },{
+            name: 'Colorado',
+            latitude: 40.5,
+            longitude: -107.5,
+        }], {
+            popupOnHover: true,
+            popupTemplate: function(data) {
+                return "<div class='hoverinfo'>" + data.name + "</div>";
             }
         });
     }

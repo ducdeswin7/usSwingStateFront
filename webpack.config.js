@@ -13,14 +13,14 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 query: {
                     presets: ['react', 'es2015'],
                 }
             },
             {
                 test: /\.scss$/,
-                loaders: ['style', 'css', 'sass']
+                loaders: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
