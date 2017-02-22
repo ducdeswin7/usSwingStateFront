@@ -41,8 +41,6 @@ class candidates extends React.Component {
         if(this.props.candidates) {
             return this.props.candidates.map((candidate, i) => {
 
-                console.log('hello marlo', candidate);
-
                 let borderStyle = {
                     border: '4px solid ' + candidate.party.party_color
                 };

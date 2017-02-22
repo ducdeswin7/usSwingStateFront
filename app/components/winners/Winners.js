@@ -26,8 +26,6 @@ class Winners extends React.Component {
     }
 
     render() {
-        console.log(this.state)
-
         return(
             <div className="winners">
 

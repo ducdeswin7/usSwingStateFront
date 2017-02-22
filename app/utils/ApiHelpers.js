@@ -7,7 +7,7 @@ export function getCandidatsInfos(presidentName) {
 
 export function getStateInfos(statename) {
     return axios.get(`http://unitedswingstates.com/api/v1/list/state/${statename}`)
-        .then((arr) => ({candidats: arr[0].data, selectedState: arr[1].data}))
+        .then((arr) => ({stateCurrent: arr.data }))
 }
 
 export function getElectionCandidat(year) {

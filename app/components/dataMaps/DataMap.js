@@ -9,6 +9,7 @@ import StateData from './stateData/StateData';
 import styles from './skylightStyles';
 import HomeData from '../home/HomeData';
 import {getStateInfos} from '../../utils/ApiHelpers';
+let _ = require('lodash');
 
 require('./datamaps.scss');
 require('./stateData.scss');
@@ -19,22 +20,28 @@ export default class DataMap extends React.Component {
         this.datamap = null;
 
         this.state = {
+            swingStates: [
+                "Colorado",
+                "Florida",
+                "Iowa",
+                "Michigan",
+                "Nevada",
+                "New Hampshire",
+                "North Carolina",
+                "Ohio",
+                "Pennsylvania",
+                "Virginia",
+                "Wisconsin"
+            ],
             currentState: {}
         }
     }
 
-    linearPalleteScale(value){
-        const dataValues = this.props.regionData.map(function(data) { return data.value });
-        const minVal = Math.min(...dataValues);
-        const maxVal = Math.max(...dataValues);
-
-        // those state color
-        return d3.scale.linear().domain([minVal, maxVal]).range(["#0e1b29","#02386F"])(value);
-    }
-
     redducedData(){
+
         const newData = this.props.regionData.reduce((object, data) => {
-            object[data.code] = { value: data.value, fillColor: this.linearPalleteScale(data.value) };
+            object[data.code] = this.state.swingStates.indexOf(data.regionName) > -1 ?
+                { value: data.value, fillKey: 'SS' } : { value: data.value, fillKey: 'defaultFill' } ;
             return object;
         }, {});
         return objectAssign({}, statesDefaults, newData);
@@ -42,6 +49,7 @@ export default class DataMap extends React.Component {
 
     renderMap($this){
 
+        console.log(this.redducedData());
         return new Datamap({
             element: ReactDOM.findDOMNode(this),
             scope: 'usa',
@@ -49,15 +57,15 @@ export default class DataMap extends React.Component {
             fills: {
                 'Republican': '#0e1b29',
                 'Democrat': '#0e1b29',
-                'Heavy Democrat': '#0e1b29',
+                'SS': '#ab9966',
                 'Light Democrat': '#0e1b29',
                 'Heavy Republican': '#0e1b29',
                 'Light Republican': '#0e1b29',
-                defaultFill: '#0e1b29'
+                'defaultFill': '#0e1b29'
             },
             geographyConfig: {
                 borderWidth: 0.3,
-                highlightFillColor: '#284f77',
+                highlightFillColor: '#1c3854',
                 popupTemplate: function(geography, data) {
 
                     if (data && data.value) {
@@ -71,14 +79,17 @@ export default class DataMap extends React.Component {
 
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
 
-                    getStateInfos("florida")
-                        .then(function (data) {
-                            $this.setState({
-                                currentState: data.stateCurrent
-                            })
-                        }.bind(this));
+                    if ($this.state.swingStates.indexOf(geography.properties.name) > -1) {
+                        getStateInfos("florida")
+                            .then(function (data) {
+                                console.log(data)
+                                $this.setState({
+                                    currentState: data.stateCurrent
+                                })
+                            }.bind(this));
 
-                    $this.refs.simpleDialog.show();
+                        $this.refs.simpleDialog.show();
+                    }
                 });
             }
         });
@@ -135,8 +146,6 @@ export default class DataMap extends React.Component {
             margin: '0px auto',
             paddingTop: '10rem',
         };
-
-        console.log('state', this.state);
 
 
         return (

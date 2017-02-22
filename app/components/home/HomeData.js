@@ -14,8 +14,6 @@ class HomeData extends React.Component {
 
     componentDidMount() {
         getElectionCandidat("2016").then((resp) => {
-            console.log(resp);
-
             this.setState({
                 candidates: resp.candidates[0].candidates
             })
@@ -23,9 +21,6 @@ class HomeData extends React.Component {
     }
 
     render() {
-
-        console.log('verification', this.state.candidates);
-
         return (
             <div className="home_informations">
                 <div className="home_candidats">
