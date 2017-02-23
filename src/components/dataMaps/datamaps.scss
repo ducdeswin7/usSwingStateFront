@@ -1,0 +1,16 @@
+.popup-maps {
+	padding: 1rem;
+	background-color: white;
+}
+
+@keyframes scale {
+	0% {transform: translateY(0)}
+	50% {transform: translateY(10px)}
+	100% {transform: translateY(0)}
+}
+
+.datamaps-marker {
+	-webkit-animation: scale 1.5s ease 0s infinite normal;
+	-moz-animation: scale 1.5s ease 0s infinite normal;
+	animation: scale 1.5s ease 0s infinite normal;
+}
