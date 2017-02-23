@@ -8,9 +8,16 @@ import KeyFigures from './KeyFigures';
 
 class StateData extends React.Component {
     render() {
+        console.log(this.props.state);
+        let imgUrl = 'http://unitedswingstates.com/uploads/states/' + this.props.state.path;
+        let backgroundStyle = {
+            background: 'url(' + imgUrl + ')no-repeat',
+            backgroundSize: 'contain',
+            overflow: 'hidden',
+        };
         return (
             <div className="state-data">
-                <div className="state-data_header">
+                <div className="state-data_header" style={backgroundStyle}>
                     <h1 className="state-data_header_title">{this.props.state.name}</h1>
                 </div>
                 <div className="state-data_content">

@@ -266,7 +266,7 @@ export default class DataMap extends React.Component {
 
         return (
                 <div id="datamap-container" style={styleMap}>
-                    <SkyLight hideOnOverlayClicked dialogStyles={styles.skylightDialog} ref="simpleDialog" title="  ">
+                    <SkyLight hideOnOverlayClicked dialogStyles={styles.skylightDialog} ref="simpleDialog" title="  " closeButtonStyle={styles.closeButtonStyle}>
                         <StateData state={ this.state.currentState }/>
                     </SkyLight>
 

@@ -2,7 +2,8 @@
 	color: #ffffff;
 
 	&_header{
-		min-height: 25vh;
+		min-height: 480px;
+		background-size: contain;
 		padding-right: 2rem;
 		display: flex;
 		justify-content: flex-end;
