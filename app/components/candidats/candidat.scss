@@ -5,13 +5,17 @@
 .candidat-lists {
 	display: flex;
 	align-items: center;
+	position: relative;
 
 	&_hr {
-		margin: 0 2rem;
+		position: absolute;
 		height: 3rem;
 		border: none;
 		width: 5px;
 		background-image: linear-gradient(to left, #14a8cc 0%, #1ee9f1 100%);
+		left: 0;
+		right: 0;
+		top: 0;
 	}
 }
 
@@ -20,8 +24,6 @@
 		width: 60px;
 		height: 60px;
 		border-radius: 50%;
-		&:nth-child(1) {
-		}
 	}
 }
 

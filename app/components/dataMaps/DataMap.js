@@ -8,7 +8,7 @@ import SkyLight from 'react-skylight';
 import StateData from './stateData/StateData';
 import styles from './skylightStyles';
 import HomeData from '../home/HomeData';
-import {getStateInfos} from '../../utils/ApiHelpers';
+import {getStateInfos, getWinners} from '../../utils/ApiHelpers';
 let _ = require('lodash');
 
 require('./datamaps.scss');
@@ -56,10 +56,9 @@ export default class DataMap extends React.Component {
         return objectAssign({}, statesDefaults, newData);
     }
 
-    showStateInformations(){
-        getStateInfos("florida")
+    showStateInformations(stateName){
+        getStateInfos(stateName)
             .then(function (data) {
-                console.log(data)
                 this.setState({
                     currentState: data.stateCurrent
                 })
@@ -68,9 +67,6 @@ export default class DataMap extends React.Component {
         this.refs.simpleDialog.show();
     }
     renderMap($this){
-        console.log('redducedData ' , this.props.regionData)
-
-
         let map =  new Datamap({
             element: ReactDOM.findDOMNode(this),
             scope: 'usa',
@@ -95,9 +91,11 @@ export default class DataMap extends React.Component {
             },
             done: function(datamap) {
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-                    if ($this.state.swingStatesFinished.indexOf(geography.properties.name) > -1) {
-                        $this.showStateInformations();
-                    }
+                    //
+                    // if ($this.state.swingStatesFinished.indexOf(geography.properties.name) > -1) {
+                    //
+                    //     $this.showStateInformations(geography.properties.name);
+                    // }
                 });
             }
         });
@@ -138,14 +136,13 @@ export default class DataMap extends React.Component {
                     }
                     if (latLng) return latLng[1];
                 })
-                .on('click' , function () {
-                    $this.showStateInformations();
+                .on('click' , function (data) {
+                    $this.showStateInformations(data.name);
                 })
                 .on('mouseover', function(datum) {
                     let $this = d3.select(this);
 
                     if (options.popupOnHover) {
-                        console.log('going', datum)
                         self.updatePopup($this, datum, options, svg);
                     }
                 })
@@ -191,7 +188,7 @@ export default class DataMap extends React.Component {
             longitude: -80,
             party: 'republican',
         },{
-            name: 'IOWA ',
+            name: 'Iowa ',
             latitude: 44,
             longitude: -95,
             party: 'republican',
@@ -215,6 +212,7 @@ export default class DataMap extends React.Component {
     }
 
     componentDidMount(){
+
         const mapContainer = d3.select('#datamap-container');
         const initialScreenWidth = this.currentScreenWidth();
         const containerWidth = (initialScreenWidth < 1000) ?
@@ -243,6 +241,12 @@ export default class DataMap extends React.Component {
                 this.datamap = this.renderMap();
             }
         });
+
+        getWinners().then((resp) => {
+            this.setState({
+                winners: resp.winners
+            })
+        })
     }
 
     // componentDidUpdate(){
@@ -260,14 +264,13 @@ export default class DataMap extends React.Component {
             paddingTop: '10rem',
         };
 
-
         return (
                 <div id="datamap-container" style={styleMap}>
                     <SkyLight hideOnOverlayClicked dialogStyles={styles.skylightDialog} ref="simpleDialog" title="  ">
                         <StateData state={ this.state.currentState }/>
                     </SkyLight>
 
-                    <HomeData candidats={this.state.candidats} state={this.state.currentState} />
+                    <HomeData winners={this.state.winners} candidats={this.state.candidats} state={this.state.currentState} />
                 </div>
 
         );

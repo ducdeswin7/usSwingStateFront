@@ -48,7 +48,7 @@ class HomeData extends React.Component {
                 {/*}*/}
 
                 <div className="home_period">
-                    <Winners />
+                    <Winners winners={this.props.winners} />
                 </div>
             </div>
         )

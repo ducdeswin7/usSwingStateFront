@@ -66,6 +66,7 @@ class candidates extends React.Component {
             </SkyLight>
 
             {this.createListCandidate()}
+            <hr className="candidat-lists_hr"/>
         </div>
         )
     }

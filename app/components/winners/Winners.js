@@ -25,6 +25,33 @@ class Winners extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            winners: nextProps.winners
+        })
+    }
+
+    createListWinners() {
+        if (this.props.winners) {
+            return this.state.winners.map((winner, i) => {
+
+                let active = {
+                    border: '4px solid ' + winner.candidate.party.party_color
+                };
+
+                return (
+                    <div className="winners_block" key={i}>
+                        <h3 className="winners_block_year">{winner.year}</h3>
+
+                        <div className="president">
+                            <img src={'http://unitedswingstates.com/uploads/candidates/' + winner.candidate.path} style={active} className="president_img" alt="president image"/>
+                        </div>
+                    </div>
+                )}
+            )
+        }
+    }
+
     render() {
         return(
             <div className="winners">
@@ -36,18 +63,8 @@ class Winners extends React.Component {
                     <CandidatProfile />
                 </SkyLight>
 
-                <div className="winners_block">
-                    <h3 className="winners_block_year">2016</h3>
-                    <Candidat color={this.state.winners.trump.color} image={this.state.winners.trump.imageUrl} popin={this} />
-                </div>
-                <div className="winners_block">
-                    <h3 className="winners_block_year">2012</h3>
-                    <Candidat color={this.state.winners.obama.color} image={this.state.winners.obama.imageUrl} popin={this} />
-                </div>
-                <div className="winners_block">
-                    <h3 className="winners_block_year">2008</h3>
-                    <Candidat color={this.state.winners.obama.color} image={this.state.winners.obama.imageUrl} popin={this} />
-                </div>
+                {this.createListWinners()}
+                <div className="winners_timeline"></div>
             </div>
         )
     }
